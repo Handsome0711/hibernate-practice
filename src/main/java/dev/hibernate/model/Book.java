@@ -1,7 +1,14 @@
 package dev.hibernate.model;
 
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "book")
@@ -10,9 +17,11 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+
     @OneToOne
     private Genre genre;
-    @OneToMany
+
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Author> authors;
 
     public Long getId() {
@@ -45,5 +54,15 @@ public class Book {
 
     public void setAuthors(List<Author> authors) {
         this.authors = authors;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", genre=" + genre
+                + ", authors=" + authors
+                + '}';
     }
 }

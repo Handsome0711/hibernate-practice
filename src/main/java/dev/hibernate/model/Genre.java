@@ -1,6 +1,10 @@
 package dev.hibernate.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "genre")
@@ -24,5 +28,13 @@ public class Genre {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
     }
 }
